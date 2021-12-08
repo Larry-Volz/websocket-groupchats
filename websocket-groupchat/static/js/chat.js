@@ -1,3 +1,8 @@
+/**get a joke */
+async function getJoke(){
+  return await axios.get("https://icanhazdadjoke.com/");
+}
+
 
 /** Client-side of groupchat. */
 
@@ -48,10 +53,10 @@ ws.onmessage = function(evt) {
     // console.log(`3b chat.js: ws.onmessage msg.type===chat msg.text == ${msg.text}`);
     if (msg.text == '/joke'){
       console.log(`HERE***`);
-       async (joke) => {
-        await axios.get("https://icanhazdadjoke.com/");
+      
+      //I get an error if I use await (Uncaught SyntaxError: await is only valid in async functions and the top level bodies of modules)
+      let joke = getJoke();
       item = $(`<li><b>${msg.name}: </b>${joke}</li>`);
-      }
     } else {
       item = $(`<li><b>${msg.name}: </b>${msg.text}</li>`);
 
