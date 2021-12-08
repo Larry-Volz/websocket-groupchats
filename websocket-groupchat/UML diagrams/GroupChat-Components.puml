@@ -1,0 +1,21 @@
+@startuml
+
+[express] --> [app.js]
+[express-ws] --> [app.js]
+[Room] --> [ChatUser Class] 
+[ChatUser Class] --> [app.js]
+[express/static] --> [app.js]
+
+component css/js {
+    [chat.html] ->[chat.js]
+    [chat.js] --> (ws.onopen)
+    (ws.onopen) --> (ws.send)
+    [chat.js] --> (ws.onmessage)
+    [chat.js] --> (ws.onerror)
+    [chat.js] --> (ws.onclose)
+}
+
+
+[app.js] --> [/chat/:roomName Handle a persistent connection to /chat/:roomName.  Creates ChatUser as user, creates .send() method]
+
+@enduml

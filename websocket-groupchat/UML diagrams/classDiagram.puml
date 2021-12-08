@@ -1,0 +1,26 @@
+@startuml
+class ChatUser {
+ -user
+ -room
+ -send(data)
+ -handleJoin(name)
+ -handleChat(text)
+ -handleMessage(jsonData)
+ -handleClose()
+}
+
+
+class Room {
+    -roomName
+    -members
+    -get(roomName)
+    -join(member)
+    -leave(member)
+    -broadcast(data)
+
+}
+
+ChatUser o-- Room
+
+
+@enduml
