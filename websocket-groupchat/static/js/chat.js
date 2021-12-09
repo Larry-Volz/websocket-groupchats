@@ -1,6 +1,8 @@
 /**get a joke */
 async function getJoke(){
-  return await axios.get("https://icanhazdadjoke.com/");
+  return await axios.get("https://icanhazdadjoke.com/", {Headers : {Accept : "application/json",
+  },
+});
 }
 
 
@@ -33,7 +35,7 @@ ws.onopen = function(evt) {
 
 /** called when msg received from server; displays it. */
 
-ws.onmessage = function(evt) {
+ws.onmessage = async function(evt) {
   // console.log("message", evt);
 
   let msg = JSON.parse(evt.data);
@@ -55,7 +57,7 @@ ws.onmessage = function(evt) {
       console.log(`HERE***`);
       
       //I get an error if I use await (Uncaught SyntaxError: await is only valid in async functions and the top level bodies of modules)
-      let joke = getJoke();
+      let joke = await getJoke();
       item = $(`<li><b>${msg.name}: </b>${joke}</li>`);
     } else {
       item = $(`<li><b>${msg.name}: </b>${msg.text}</li>`);
